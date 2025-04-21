@@ -1,12 +1,12 @@
 #import "state.typ": *
 
 #let whitespaces = (
-  "\u{0009}",
-  "\u{000B}",
-  "\u{000C}",
-  "\u{0020}",
-  "\u{00A0}",
-  "\u{FEFF}",
+  "\u{0009}", // Character Tabulation
+  "\u{000B}", // Line Tabulation
+  "\u{000C}", // Form Feed
+  "\u{0020}", // Space
+  "\u{00A0}", // No-Break Space
+  "\u{FEFF}", // Byte order mark | Zero Width No-Break Space
 )
 #let whitespace-regex = regex("[" + whitespaces.join() + "]")
 
@@ -104,6 +104,7 @@
           if c == "\u{FEFF}" {
             // do nothing
           } else if c == "\u{00A0}" or c == " " {
+            // No-Break Space and Space to Space
             leading-whitespace += " "
           } else {
             leading-whitespace += c

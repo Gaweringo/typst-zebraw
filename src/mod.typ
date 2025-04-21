@@ -112,6 +112,9 @@
   let format-indentation(idt, height, line-height) = {
     if indentation <= 0 { return idt }
 
+    // Removing the Byte order mark, should there be one
+    let idt = idt.trim("\u{feff}", at: start)
+
     // Process each leading space in indentation string
     let len = idt.len()
     let processed = ""
